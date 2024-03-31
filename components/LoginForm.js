@@ -1,64 +1,86 @@
-import PasswordInput from "./password";
+import React, { useCallback } from "react";
+import PasswordInput from "./PasswordInput";
+import LoadingSpinner from "./LoadingSpinner";
 
 const LoginForm = ({
-    handleSubmit,
-    setUsername,
-    password,
-    setPassword,
-    role,
-    setRole,
-    loading,
+  handleSubmit,
+  setUsername,
+  password,
+  setPassword,
+  role,
+  setRole,
+  loading,
 }) => {
-    return (
-        <div className="form-container bg-white shadow p-6 rounded">
-            {loading && <div className="loading"></div>}
-            <h2 className="mb-3 text-blue-600 text-center">Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="username" className="form-label">
-                        <strong>Username</strong>
-                    </label>
-                    <input
-                        type="text"
-                        placeholder="Enter username"
-                        className="block appearance-none w-full h-9 py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-                        id="username"
-                        onChange={setUsername}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
-                        <strong>Password</strong>
-                    </label>
-                    <PasswordInput value={password} onChange={setPassword} />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="role" className="form-label">
-                        <strong>Role</strong>
-                    </label>
-                    <select
-                        className="form-select focus:outline-none block w-full h-9 py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"
-                        id="role"
-                        value={role}
-                        onChange={setRole}
-                    >
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
+  const handleUsernameChange = useCallback(
+    (e) => {
+      setUsername(e.target.value);
+    },
+    [setUsername]
+  );
 
-                <div className="d-grid">
-                    <button
-                        type="submit"
-                        className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-blue-600 text-white hover:bg-blue-600"
-                    >
-                        Login
-                    </button>
-                </div>
-            </form>
+  const handlePasswordChange = useCallback(
+    (e) => {
+      setPassword(e.target.value);
+    },
+    [setPassword]
+  );
+
+  const handleRoleChange = useCallback(
+    (e) => {
+      setRole(e.target.value);
+    },
+    [setRole]
+  );
+  return (
+    <div className="bg-white shadow p-6 rounded w-full sm:w-[600px] h-full">
+      {loading && <LoadingSpinner />}
+      <h2 className="mb-3 font-bold text-blue-600 text-center">Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="username">
+            <strong>Username</strong>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter username"
+            className="block w-full focus:outline-blue-600 h-9 py-1 px-2 mb-1 bg-white text-gray-800 border border-gray-200 rounded"
+            id="username"
+            onChange={handleUsernameChange}
+            required
+          />
         </div>
-    );
+        <div className="mb-3">
+          <label htmlFor="password">
+            <strong>Password</strong>
+          </label>
+          <PasswordInput value={password} onChange={handlePasswordChange} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="role">
+            <strong>Role</strong>
+          </label>
+          <select
+            className="block w-full focus:outline-blue-600 h-9 py-1 px-2 mb-1 bg-white text-gray-800 border border-gray-200 rounded"
+            id="role"
+            value={role}
+            onChange={handleRoleChange}
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            className="inline-block select-none rounded py-1 px-3 bg-blue-600 text-white hover:bg-blue-700"
+          >
+            Login
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default LoginForm;
