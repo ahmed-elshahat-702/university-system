@@ -20,7 +20,7 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    if (loading || submitDisabled) return; // Prevent multiple submissions
+    if (loading || submitDisabled) return;
 
     setLoading(true);
     setSubmitDisabled(true);
@@ -62,7 +62,10 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
         showModal ? "" : "hidden"
       }`}
     >
-      <div className="absolute inset-0 bg-black opacity-25"></div>
+      <div
+        className="absolute inset-0 bg-black opacity-25"
+        onClick={handleCloseModal}
+      ></div>
       <div className="bg-white rounded-lg p-6 z-50">
         {loading && <LoadingSpinner />}
         <div className="mb-4">

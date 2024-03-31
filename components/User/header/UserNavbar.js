@@ -37,6 +37,23 @@ const UserNavbar = ({ id, toggleSidebar }) => {
     fetchData();
   }, [id]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !event.target.closest(".relative")
+      ) {
+        setDropDownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const renderProfileContent = () => {
     if (loading) {
       return (
@@ -61,9 +78,9 @@ const UserNavbar = ({ id, toggleSidebar }) => {
     }
   };
 
-  const handleToggleDropdown = useCallback(() => {
+  const handleToggleDropdown = () => {
     setDropDownOpen((prevState) => !prevState);
-  }, []);
+  };
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -87,19 +104,6 @@ const UserNavbar = ({ id, toggleSidebar }) => {
     });
   };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropDownOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [handleClickOutside]);
-
   return (
     <>
       <nav className="bg-white shadow w-full fixed top-0 flex justify-between items-center h-[70px] px-2 z-50">
@@ -120,7 +124,6 @@ const UserNavbar = ({ id, toggleSidebar }) => {
         <div className="right-part flex gap-2">
           <div className="relative">
             <button
-              ref={dropdownRef}
               className="focus:outline-none hidden-arrow flex items-center"
               type="button"
               onClick={handleToggleDropdown}
@@ -153,14 +156,14 @@ const UserNavbar = ({ id, toggleSidebar }) => {
                     Change Password
                   </button>
                 </li>
-                <li>
+                {/* <li>
                   <a
                     href="#"
                     className="w-full text-left py-2 px-4 block whitespace-no-wrap hover:bg-gray-100"
                   >
                     Settings
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <button
                     className="w-full text-left py-2 px-4 block whitespace-no-wrap hover:bg-gray-100"
