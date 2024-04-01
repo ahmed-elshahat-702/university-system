@@ -6,7 +6,7 @@ const StudentsTable = ({ users, deleteUser }) => {
     <div className="overflow-x-auto">
       <table className="w-full max-w-full bg-transparent mt-4">
         <thead className="border-b border-gray-500 text-left">
-          <tr className="bg-gray-100">
+          <tr className=" bg-blue-100">
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Username</th>
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Password</th>
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Role</th>
@@ -16,7 +16,7 @@ const StudentsTable = ({ users, deleteUser }) => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user._id} className="border-b border-gray-200">
+            <tr key={user._id} className="border-b bg-white border-gray-200">
               <td className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">
                 {user.userRegistration.username}
               </td>
@@ -37,7 +37,7 @@ const StudentsTable = ({ users, deleteUser }) => {
               <td className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">
                 <Link
                   href={`/admin/user-details/${user._id}`}
-                  className="text-blue-600 hover:underline focus:outline-none focus:ring focus:ring-blue-400"
+                  className="text-blue-600 hover:underline focus:outline-none"
                 >
                   <span>Details</span>
                 </Link>

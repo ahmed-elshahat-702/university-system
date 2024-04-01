@@ -49,7 +49,11 @@ const UserDetailsPage = ({ params }) => {
   const renderPageContent = () => {
     switch (activePage) {
       case "student-data":
-        return <StudentData loading={loading} userData={userData} />;
+        return (
+          <div className="page student-page p-3" id="student">
+            <StudentData loading={loading} userData={userData} />
+          </div>
+        );
       case "exams-table":
         return (
           <div className="page exams-page p-3" id="exams">
@@ -100,7 +104,6 @@ const UserDetailsPage = ({ params }) => {
             setSidebarOpen((prevSidebarOpen) => !prevSidebarOpen)
           }
         />
-        <ChangePasswordModal id={id} />
         <UserSideNav
           loading={loading}
           sidebarOpen={sidebarOpen}
@@ -108,7 +111,7 @@ const UserDetailsPage = ({ params }) => {
           setActivePage={setActivePage}
         />
       </header>
-      <main className={`bg-gray-100 h-full ${loading ? "p-2" : ""}`}>
+      <main className={`bg-gray-100 min-h-screen ${loading ? "p-2" : ""}`}>
         <div className={`md:ps-[240px] ${sidebarOpen ? "" : "pt-[70px]"} `}>
           {loading ? <LoadingButton /> : renderPageContent()}
         </div>

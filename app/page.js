@@ -5,7 +5,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import LoginForm from "@/components/LoginForm";
-import LoadingSpinner from "@/components/LoadingSpinner";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -13,8 +12,6 @@ const LoginPage = () => {
   const [role, setRole] = useState("user");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const [activePage, setActivePage] = useState("student-data");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,14 +31,14 @@ const LoginPage = () => {
         const storageKey = role === "admin" ? "adminData" : "userData";
         sessionStorage.setItem(storageKey, JSON.stringify({ username, role }));
         router.push(role === "admin" ? "/admin" : `/user/${user._id}`);
+        setUsername("");
+        setPassword("");
+        setRole("user");
         Swal.fire({
           icon: "success",
           title: "Success",
           text: "Login successful!",
         });
-        setUsername("");
-        setPassword("");
-        setRole("user");
       }
     } catch (error) {
       let errorMessage = "Something went wrong!";
@@ -62,7 +59,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page bg-slate-200 h-full">
-      <div className="flex flex-wrap  justify-center items-center">
+      <div className="flex flex-wrap justify-center items-center">
         <div className="mt-20 w-full flex justify-center">
           <LoginForm
             setUsername={setUsername}
@@ -74,7 +71,6 @@ const LoginPage = () => {
           />
         </div>
       </div>
-      {loading && <LoadingSpinner />}
     </div>
   );
 };

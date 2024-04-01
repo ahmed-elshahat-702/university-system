@@ -76,7 +76,7 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
                 Old Password
               </label>
               <PasswordInput
-                id="oldPassword"
+                id={"oldPassword"}
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
               />
@@ -86,7 +86,7 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
                 New Password
               </label>
               <PasswordInput
-                id="newPassword"
+                id={"newPassword"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />

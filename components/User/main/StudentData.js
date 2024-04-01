@@ -1,3 +1,5 @@
+import "@/styles/StudentData.css";
+
 const StudentData = ({ loading, userData }) => {
   const renderUserDataSection = (sectionTitle, sectionData) => {
     return (
@@ -33,7 +35,7 @@ const StudentData = ({ loading, userData }) => {
   };
 
   return (
-    <div className="page student-page p-3" id="student">
+    <>
       <div className="student-main-info bg-white border border-gray-200 shadow-lg rounded-lg p-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="flex flex-col items-center">
           <h6 className="text-xs text-gray-500 mb-1">Faculty of</h6>
@@ -83,7 +85,7 @@ const StudentData = ({ loading, userData }) => {
           </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
