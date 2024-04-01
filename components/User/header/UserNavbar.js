@@ -1,5 +1,3 @@
-"use client";
-
 import { faBars, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
@@ -7,6 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import ChangePasswordModal from "./ChangePasswordModal";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const UserNavbar = ({ id, toggleSidebar }) => {
   const [loading, setLoading] = useState(true);
@@ -57,23 +56,19 @@ const UserNavbar = ({ id, toggleSidebar }) => {
   const renderProfileContent = () => {
     if (loading) {
       return (
-        <>
-          <div className="flex flex-col items-center">
-            <div className="animate-pulse skeleton-line w-40 h-4 mb-2 bg-slate-200 rounded"></div>
-            <div className="animate-pulse skeleton-line w-56 h-3 mb-2 bg-slate-200 rounded"></div>
-          </div>
-        </>
+        <div className="flex flex-col items-center">
+          <div className="animate-pulse skeleton-line w-40 h-4 mb-2 bg-slate-200 rounded"></div>
+          <div className="animate-pulse skeleton-line w-56 h-3 mb-2 bg-slate-200 rounded"></div>
+        </div>
       );
     } else {
       return (
-        <>
-          <div className="flex flex-col items-center">
-            <p className="mb-0">{userData.userData?.fullName}</p>
-            <p className="mb-0 font-normal text-s text-gray-500">
-              {userData.userContactData?.email}
-            </p>
-          </div>
-        </>
+        <div className="flex flex-col items-center">
+          <p className="mb-0">{userData.userData?.fullName}</p>
+          <p className="mb-0 font-normal text-s text-gray-500">
+            {userData.userContactData?.email}
+          </p>
+        </div>
       );
     }
   };
@@ -131,11 +126,11 @@ const UserNavbar = ({ id, toggleSidebar }) => {
               {loading ? (
                 <div className="animate-pulse rounded-full bg-slate-200 h-10 w-10"></div>
               ) : (
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
+                <Image
+                  src="/profile.png"
                   className="rounded-full"
-                  width="40"
-                  height="40"
+                  width="50"
+                  height="50"
                   alt="Avatar"
                   loading="lazy"
                 />
@@ -146,24 +141,16 @@ const UserNavbar = ({ id, toggleSidebar }) => {
             {dropDownOpen && (
               <ul
                 ref={dropdownRef}
-                className="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-lg"
+                className="absolute right-0 mt-2 w-48 bg-white border rounded-md overflow-hidden shadow"
               >
                 <li>
                   <button
-                    className="w-full text-left py-2 px-4 block whitespace-no-wrap hover:bg-gray-100"
+                    className="w-full text-left py-2 px-4 block whitespace-no-wrap border-b hover:bg-gray-100"
                     onClick={handleShowModal}
                   >
                     Change Password
                   </button>
                 </li>
-                {/* <li>
-                  <a
-                    href="#"
-                    className="w-full text-left py-2 px-4 block whitespace-no-wrap hover:bg-gray-100"
-                  >
-                    Settings
-                  </a>
-                </li> */}
                 <li>
                   <button
                     className="w-full text-left py-2 px-4 block whitespace-no-wrap hover:bg-gray-100"

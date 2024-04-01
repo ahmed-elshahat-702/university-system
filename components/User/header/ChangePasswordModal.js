@@ -1,5 +1,3 @@
-"use client";
-
 import PasswordInput from "@/components/PasswordInput";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import axios from "axios";
@@ -13,9 +11,11 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
   const handleCloseModal = () => {
-    setShowModal(false);
-    setOldPassword("");
-    setNewPassword("");
+    if (!loading) {
+      setShowModal(false);
+      setOldPassword("");
+      setNewPassword("");
+    }
   };
 
   const handleChangePassword = async (e) => {
@@ -63,7 +63,7 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
       }`}
     >
       <div
-        className="absolute inset-0 bg-black opacity-25"
+        className="absolute inset-0 bg-black opacity-25 cursor-pointer"
         onClick={handleCloseModal}
       ></div>
       <div className="bg-white rounded-lg p-6 z-50">
@@ -72,15 +72,21 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
           <h2 className="text-xl font-bold mb-2">Change Password</h2>
           <form>
             <div className="mb-4">
-              <label className="block mb-2">Old Password</label>
+              <label htmlFor="oldPassword" className="block mb-2">
+                Old Password
+              </label>
               <PasswordInput
+                id="oldPassword"
                 value={oldPassword}
                 onChange={(e) => setOldPassword(e.target.value)}
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-2">New Password</label>
+              <label htmlFor="newPassword" className="block mb-2">
+                New Password
+              </label>
               <PasswordInput
+                id="newPassword"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
@@ -88,14 +94,14 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
             <div className="flex justify-end">
               <button
                 type="button"
-                className="bg-gray-500 hover:bg-gray-700 text-white rounded-lg px-4 py-2 mr-2"
+                className="p-2 mr-2 bg-red-600 rounded text-white hover:bg-red-700"
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
               <button
                 type="button"
-                className="bg-blue-500 hover:bg-blue-700 text-white rounded-lg px-4 py-2"
+                className="p-2 bg-blue-600 rounded text-white hover:bg-blue-700"
                 onClick={handleChangePassword}
                 disabled={submitDisabled}
               >

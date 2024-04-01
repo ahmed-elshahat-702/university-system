@@ -14,6 +14,8 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  const [activePage, setActivePage] = useState("student-data");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);

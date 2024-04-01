@@ -1,35 +1,10 @@
-"use client";
-
-import { faBars, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
-const UserNavbar = ({ id, toggleSidebar }) => {
-  const [loading] = useState(true);
-  const [dropDownOpen, setDropDownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
+const AdminNavbar = ({ toggleSidebar }) => {
   const router = useRouter();
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
-        !event.target.closest(".relative")
-      ) {
-        setDropDownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
 
   const handleLogout = () => {
     Swal.fire({
@@ -49,28 +24,27 @@ const UserNavbar = ({ id, toggleSidebar }) => {
   };
 
   return (
-    <>
-      <nav className="bg-white shadow w-full fixed top-0 flex justify-between items-center h-[70px] px-2 z-50">
+    <nav className="bg-white shadow w-full fixed top-0 flex justify-between items-center h-[70px] px-2 z-50">
+      <button className="focus:outline-none md:hidden" onClick={toggleSidebar}>
+        <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
+      </button>
+      <div className="brand hidden md:inline-block">
+        <h3>NINU</h3>
+        <h6 className="text-body-secondary">university system</h6>
+      </div>
+      <div className="middle-part flex flex-col items-center">
+        <div className="font-bold">Admin Dashboard</div>
+      </div>
+      <div className="right-part flex gap-2">
         <button
-          className="focus:outline-none md:hidden"
-          onClick={toggleSidebar}
-        >
-          <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
-        </button>
-        <div className="brand hidden md:inline-block">
-          <h3>NINU</h3>
-          <h6 className="text-body-secondary">university system</h6>
-        </div>
-          <div className="name font-bold">Admin Panel</div>
-        <button
-          className="rounded border border-red-500 py-2 px-4 block whitespace-no-wrap hover:bg-red-600 hover:text-white"
+          className="py-2 px-4 block whitespace-no-wrap text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white"
           onClick={handleLogout}
         >
           Logout
         </button>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 };
 
-export default UserNavbar;
+export default AdminNavbar;

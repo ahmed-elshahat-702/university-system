@@ -1,5 +1,5 @@
-"use client";
-
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMoneyBill,
   faRankingStar,
@@ -9,36 +9,19 @@ import {
   faUser,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
 
-const UserSideNav = ({ sidebarOpen, setSidebarOpen }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const [activePage, setActivePage] = useState(
-    pathname.split("/")[3] ? pathname.split("/")[3] : "/"
-  );
+const AdminSideNav = ({ loading, sidebarOpen, activePage, setActivePage }) => {
   const [activeIcon, setActiveIcon] = useState(faUser);
-  const activeTextColor = "text-white";
-  const activeBgColor = "bg-blue-600";
-  const activeBgHoverColor = "hover:bg-blue-700";
-
-  const handleNavigation = (route) => {
-    router.push(route);
-    setSidebarOpen(false);
-  };
 
   const sideNavLinks = [
     {
-      id: "/",
+      id: "students",
       name: "Students",
       icon: faUser,
     },
     {
-      id: "exams",
-      name: "Exams",
+      id: "exams-table",
+      name: "Exams Table",
       icon: faTableList,
     },
     {
@@ -57,8 +40,8 @@ const UserSideNav = ({ sidebarOpen, setSidebarOpen }) => {
       icon: faRankingStar,
     },
     {
-      id: "results",
-      name: "Results",
+      id: "result",
+      name: "Result",
       icon: faTriangleExclamation,
     },
     {
@@ -77,27 +60,33 @@ const UserSideNav = ({ sidebarOpen, setSidebarOpen }) => {
       <div className="container mx-auto py-4 px-2">
         {sideNavLinks.map((link) => (
           <button
-            className={`w-full text-start py-2 px-4 mb-2 rounded-md 
-            ${activePage === link.id ? activeBgColor : ""}
-             ${activePage === link.id ? activeTextColor : "text-gray-900 "}
-             ${
-               activePage === link.id ? activeBgHoverColor : "hover:bg-blue-100"
-             }
-            `}
+            className={`w-full flex items-center py-2 px-4 mb-2 rounded-md ${
+              activePage === link.id
+                ? "text-white bg-blue-600"
+                : "text-gray-900 hover:bg-blue-100"
+            }`}
             onClick={() => {
-              handleNavigation(`/admin/${link.id}`);
               setActivePage(link.id);
               setActiveIcon(link.icon);
             }}
             key={link.id}
           >
-            <FontAwesomeIcon
-              icon={link.icon}
-              className={`h-5 w-5 mr-2 ${
-                activeIcon === link.icon ? activeTextColor : "text-gray-900"
-              }`}
-            />
-            <span className="ml-2">{link.name}</span>
+            {loading ? (
+              <>
+                <div className="animate-pulse rounded-full bg-gray-200 h-5 w-5 mr-2"></div>
+                <div className="animate-pulse rounded bg-gray-200 h-4 w-32 ml-2"></div>
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon
+                  icon={link.icon}
+                  className={`h-5 w-5 mr-2 ${
+                    activeIcon === link.icon ? "text-white" : "text-gray-900"
+                  }`}
+                />
+                <span className="ml-2">{link.name}</span>
+              </>
+            )}
           </button>
         ))}
       </div>
@@ -105,4 +94,4 @@ const UserSideNav = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default UserSideNav;
+export default AdminSideNav;

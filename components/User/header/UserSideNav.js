@@ -1,5 +1,3 @@
-"use client";
-
 import {
   faMoneyBill,
   faRankingStar,
@@ -10,29 +8,12 @@ import {
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 
-const UserSideNav = ({ id, sidebarOpen, setSidebarOpen }) => {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const [activePage, setActivePage] = useState(
-    pathname.split("/")[3] ? pathname.split("/")[3] : "/"
-  );
-  const [activeIcon, setActiveIcon] = useState(faUser);
-  const activeTextColor = "text-white";
-  const activeBgColor = "bg-blue-600";
-  const activeBgHoverColor = "hover:bg-blue-700";
-
-  const handleNavigation = (route) => {
-    router.push(route);
-    setSidebarOpen(false);
-  };
-
+const UserSideNav = ({ loading, sidebarOpen, activePage, setActivePage }) => {
   const sideNavLinks = [
     {
-      id: "/",
+      id: "student-data",
       name: "Student Data",
       icon: faUser,
     },
@@ -77,27 +58,30 @@ const UserSideNav = ({ id, sidebarOpen, setSidebarOpen }) => {
       <div className="container mx-auto py-4 px-2">
         {sideNavLinks.map((link) => (
           <button
-            className={`w-full text-start py-2 px-4 mb-2 rounded-md 
-            ${activePage === link.id ? activeBgColor : ""}
-             ${activePage === link.id ? activeTextColor : "text-gray-900 "}
-             ${
-               activePage === link.id ? activeBgHoverColor : "hover:bg-blue-100"
-             }
-            `}
-            onClick={() => {
-              handleNavigation(`/user/${id}/${link.id}`);
-              setActivePage(link.id);
-              setActiveIcon(link.icon);
-            }}
+            className={`w-full flex items-center py-2 px-4 mb-2 rounded-md ${
+              activePage === link.id
+                ? "text-white bg-blue-600"
+                : "text-gray-900 hover:bg-blue-100"
+            }`}
+            onClick={() => setActivePage(link.id)}
             key={link.id}
           >
-            <FontAwesomeIcon
-              icon={link.icon}
-              className={`h-5 w-5 mr-2 ${
-                activeIcon === link.icon ? activeTextColor : "text-gray-900"
-              }`}
-            />
-            <span className="ml-2">{link.name}</span>
+            {loading ? (
+              <>
+                <div className="animate-pulse rounded-full bg-slate-200 h-5 w-5 mr-2 "></div>
+                <div className="animate-pulse rounded bg-slate-200 h-4 w-32 ml-2"></div>
+              </>
+            ) : (
+              <>
+                <FontAwesomeIcon
+                  icon={link.icon}
+                  className={`h-5 w-5 mr-2 ${
+                    activePage === link.id ? "text-white" : "text-gray-900"
+                  }`}
+                />
+                <span className="ml-2">{link.name}</span>
+              </>
+            )}
           </button>
         ))}
       </div>

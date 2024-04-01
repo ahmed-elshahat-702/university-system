@@ -1,7 +1,7 @@
-.user-details-page .edit-button{
+.edit-button{
     position: relative;
 }
-.user-details-page .edit-button::before{
+.edit-button::before{
     content: "";
     width: 10px;
     height: 1px;

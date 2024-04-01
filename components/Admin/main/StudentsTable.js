@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const UsersTable = ({ users, deleteUser }) => {
+const StudentsTable = ({ users, deleteUser }) => {
   return (
     <div className="overflow-x-auto">
       <table className="w-full max-w-full bg-transparent mt-4">
@@ -50,4 +50,4 @@ const UsersTable = ({ users, deleteUser }) => {
   );
 };
 
-export default UsersTable;
+export default StudentsTable;
