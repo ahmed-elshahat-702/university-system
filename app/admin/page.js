@@ -25,6 +25,7 @@ const page = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [, setDeletedUser] = useState(null);
   const [activePage, setActivePage] = useState("students");
+  const [collapsed, setCollapsed] = useState(false);
 
   const getUsers = async () => {
     try {
@@ -115,49 +116,77 @@ const page = () => {
           setActivePage={setActivePage}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
+          collapsed={collapsed}
+          setCollapsed={() => setCollapsed(!collapsed)}
         />
       </header>
-      <main className={`bg-gray-100 h-full ${loading ? "p-2" : ""}`}>
-        <div className={`md:ps-[240px] ${sidebarOpen ? "" : "pt-[70px]"} `}>
+      <main
+        className={`bg-gray-100 w-full flex justify-end h-full ${
+          loading ? "p-2" : ""
+        }`}
+      >
+        <div
+          className={`w-full transition-all ease-in-out duration-300 ${
+            collapsed ? "md:w-11/12" : "md:w-4/5"
+          }  ${sidebarOpen ? "pt-0 md:pt-[75px]" : "pt-[75px]"} `}
+        >
           {loading ? (
-            <LoadingButton />
+            <div className="absolute top-20 left-1/2">
+              <LoadingButton />
+            </div>
           ) : (
             (activePage === "students" && (
-              <Students
-                deleteUser={deleteUser}
-                users={users}
-                setFilteredUsers={setFilteredUsers}
-                filteredUsers={filteredUsers}
-              />
+              <div className="students-page h-full">
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Students
+                    deleteUser={deleteUser}
+                    users={users}
+                    setFilteredUsers={setFilteredUsers}
+                    filteredUsers={filteredUsers}
+                  />
+                </div>
+              </div>
             )) ||
             (activePage === "exams-table" && (
               <div className="page exams-page p-3" id="exams">
-                <ExamsTable />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <ExamsTable />
+                </div>
               </div>
             )) ||
             (activePage === "result" && (
               <div className="page exams-results-page p-3" id="exams-results">
-                <Result />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Result />
+                </div>
               </div>
             )) ||
             (activePage === "ranking" && (
               <div className="page ranking-page p-3" id="ranking">
-                <Ranking />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Ranking />
+                </div>
               </div>
             )) ||
             (activePage === "survey" && (
               <div className="page survey-page p-3" id="survey">
-                <Survey />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Survey />
+                </div>
               </div>
             )) ||
             (activePage === "payments" && (
               <div className="page payment-page p-3" id="payments">
-                <Payments />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Payments />
+                </div>
               </div>
             )) ||
             (activePage === "wallet" && (
               <div className="page wallet-page p-3" id="wallet">
-                <Wallet />
+                <div className="container mx-auto sm:px-4 max-w-full p-7">
+                  <Wallet />
+                </div>
               </div>
             ))
           )}

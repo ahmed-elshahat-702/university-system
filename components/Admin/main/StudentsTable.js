@@ -6,7 +6,7 @@ const StudentsTable = ({ users, deleteUser }) => {
     <div className="overflow-x-auto">
       <table className="w-full max-w-full bg-transparent mt-4">
         <thead className="border-b border-gray-500 text-left">
-          <tr className=" bg-blue-100">
+          <tr className=" bg-gray-600 text-white">
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Username</th>
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Password</th>
             <th className="px-4 py-2 sm:w-1/5 md:w-1/4 lg:w-1/5">Role</th>
