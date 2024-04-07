@@ -1,6 +1,9 @@
-import React, { useCallback } from "react";
-import PasswordInput from "./PasswordInput";
+import { useCallback, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { GoMention } from "react-icons/go";
+import { IoLockClosedOutline } from "react-icons/io5";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const LoginForm = ({
   handleSubmit,
@@ -11,75 +14,66 @@ const LoginForm = ({
   setRole,
   loading,
 }) => {
-  const handleUsernameChange = useCallback(
-    (e) => {
-      setUsername(e.target.value);
-    },
-    [setUsername]
-  );
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handlePasswordChange = useCallback(
-    (e) => {
-      setPassword(e.target.value);
-    },
-    [setPassword]
-  );
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-  const handleRoleChange = useCallback(
-    (e) => {
-      setRole(e.target.value);
-    },
-    [setRole]
-  );
   return (
-    // <div className="p-6 w-full sm:w-[600px] h-full">
     <>
       {loading && <LoadingSpinner />}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="username">
-            <strong>Username</strong>
-          </label>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2.5 bg-white w-full p-[30px] rounded-md"
+      >
+        <label htmlFor="username" className="text-gray-950">
+          Username
+        </label>
+        <div className="inputForm">
+          <GoMention className="text-3xl pr-2 border-r border-gray-300" />
           <input
             type="text"
-            placeholder="Enter username"
-            className="block w-full focus:outline-blue-600 h-9 py-1 px-2 mb-1 bg-white text-gray-800 border border-gray-200 rounded"
             id="username"
-            onChange={handleUsernameChange}
+            className="input"
+            placeholder="Enter your Username"
+            onChange={setUsername}
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="password">
-            <strong>Password</strong>
-          </label>
-          <PasswordInput value={password} onChange={handlePasswordChange} />
+        <label htmlFor="password" className="text-gray-950">
+          Password
+        </label>
+        <div className="inputForm">
+          <IoLockClosedOutline className="text-3xl pr-2 border-r border-gray-300" />
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            className="input"
+            placeholder="Enter your Password"
+            value={password}
+            onChange={setPassword}
+          />
+          <button type="button" onClick={togglePasswordVisibility}>
+            {showPassword ? (
+              <FaRegEyeSlash className="text-4xl px-2 border-l border-gray-300" />
+            ) : (
+              <FaRegEye className="text-4xl px-2 border-l border-gray-300" />
+            )}
+          </button>
         </div>
-        <div className="mb-3">
-          <label htmlFor="role">
-            <strong>Role</strong>
-          </label>
-          <select
-            className="block w-full focus:outline-blue-600 h-9 py-1 px-2 mb-1 bg-white text-gray-800 border border-gray-200 rounded"
-            id="role"
-            value={role}
-            onChange={handleRoleChange}
-          >
+        <label htmlFor="password" className="text-gray-950">
+          Role
+        </label>
+        <div className="inputForm">
+          <MdOutlineAdminPanelSettings className="text-3xl pr-2 border-r border-gray-300" />
+          <select className="role" id="role" value={role} onChange={setRole}>
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
         </div>
-
-        <div>
-          <button
-            type="submit"
-            className="inline-block select-none rounded py-1 px-3 bg-blue-600 text-white hover:bg-blue-700"
-          >
-            Login
-          </button>
-        </div>
+        <button className="button-submit">Sign In</button>
       </form>
-      {/* </div> */}
     </>
   );
 };

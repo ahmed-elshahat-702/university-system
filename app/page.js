@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import LoginForm2 from "@/components/LoginForm2";
+import LoginForm from "@/components/LoginForm";
 import Image from "next/image";
 
 const LoginPage = () => {
@@ -80,7 +80,7 @@ const LoginPage = () => {
           </h3>
         </div>
         <div className="w-full">
-          <LoginForm2
+          <LoginForm
             setUsername={(e) => {
               setUsername(e.target.value);
             }}
