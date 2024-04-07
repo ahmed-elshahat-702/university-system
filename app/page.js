@@ -5,18 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import LoginForm from "@/components/LoginForm";
-import { GoMention } from "react-icons/go";
-import { CiLock } from "react-icons/ci";
-import { FaRegEye, FaRegEyeSlash, FaRegUser } from "react-icons/fa";
 import LoginForm2 from "@/components/LoginForm2";
-{
-  /* 
-  <FaRegEye />;
-  <FaRegEyeSlash />
-  <FaRegUser />
-   */
-}
+import Image from "next/image";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -24,6 +14,11 @@ const LoginPage = () => {
   const [role, setRole] = useState("user");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const imgStyle = {
+    width: "100%",
+    height: "auto",
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -70,7 +65,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page h-screen flex p-3 gap-3">
+    <div className="login-page h-screen md:flex p-3 gap-3">
       <div
         className="left h-full w-full md:w-1/2 rounded-md bg-gray-100 space-y-6
       p-4"
@@ -85,14 +80,6 @@ const LoginPage = () => {
           </h3>
         </div>
         <div className="w-full">
-          {/* <LoginForm
-            setUsername={setUsername}
-            setPassword={setPassword}
-            handleSubmit={handleSubmit}
-            loading={loading}
-            role={role}
-            setRole={setRole}
-          /> */}
           <LoginForm2
             setUsername={(e) => {
               setUsername(e.target.value);
@@ -109,9 +96,20 @@ const LoginPage = () => {
           />
         </div>
       </div>
-      <div className="left h-full w-full md:w-1/2 rounded-md bg-green-500">
-        <div className="mt-20 w-full flex justify-center">
-          <h1>hello</h1>
+      <div
+        className="right h-full w-full md:w-1/2 rounded-md hidden md:flex  flex-col justify-center
+      p-4"
+      >
+        <div className="w-full">
+          <Image
+            src="/landing.jpg"
+            width={500}
+            height={500}
+            alt="landing"
+            className="rounded"
+            priority={true}
+            style={imgStyle}
+          />
         </div>
       </div>
     </div>

@@ -56,9 +56,9 @@ const LoginForm2 = ({
           />
           <button type="button" onClick={togglePasswordVisibility}>
             {showPassword ? (
-              <FaRegEyeSlash className="text-3xl pl-2 border-l border-gray-300" />
+              <FaRegEyeSlash className="text-4xl px-2 border-l border-gray-300" />
             ) : (
-              <FaRegEye className="text-3xl pl-2 border-l border-gray-300" />
+              <FaRegEye className="text-4xl px-2 border-l border-gray-300" />
             )}
           </button>
         </div>
