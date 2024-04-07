@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 import UsersModel from "@/app/api/models/Users";
 import { isValidObjectId } from "mongoose";
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 export async function PUT(request, context) {
   const { id } = context.params;

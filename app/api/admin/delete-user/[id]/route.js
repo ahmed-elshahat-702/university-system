@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 import UsersModel from "@/app/api/models/Users";
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 export async function DELETE(request, context) {
   try {
