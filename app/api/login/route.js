@@ -3,9 +3,7 @@ import AdminsModel from "@/app/api/models/Admins";
 import UsersModel from "@/app/api/models/Users";
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
   })

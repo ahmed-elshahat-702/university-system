@@ -32,9 +32,9 @@ const LoginForm = ({
     [setRole]
   );
   return (
-    <div className="bg-white shadow p-6 rounded w-full sm:w-[600px] h-full">
+    // <div className="p-6 w-full sm:w-[600px] h-full">
+    <>
       {loading && <LoadingSpinner />}
-      <h2 className="mb-3 font-bold text-blue-600 text-center">Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="username">
@@ -79,7 +79,8 @@ const LoginForm = ({
           </button>
         </div>
       </form>
-    </div>
+      {/* </div> */}
+    </>
   );
 };
 

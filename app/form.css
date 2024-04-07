@@ -1,0 +1,19 @@
+.inputForm {
+    @apply h-[50px] flex items-center transition-[0.2s] duration-[ease-in-out] pl-2.5 rounded-[10px] border-[1.5px] border-solid border-[#ecedec] focus-within:border-[1.5px] focus-within:border-solid focus-within:border-[#2d79f3];
+}
+
+.input {
+    @apply w-[85%] h-full ml-2.5  border-[none];
+}
+
+.role {
+  @apply w-[90%] h-full ml-2.5 rounded-[10px] border-none outline-none;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.button-submit {
+    @apply bg-[#151717] text-[white] text-[15px] font-medium h-[50px] w-full cursor-pointer mt-5 mb-2.5 mx-0 rounded-[10px] border-[none] hover:bg-[#252727];
+}
