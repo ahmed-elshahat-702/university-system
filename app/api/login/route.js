@@ -13,11 +13,9 @@ mongoose
 
 export async function POST(request) {
   try {
-    // Extract data from the request
     const requestData = await request.json();
     const { username, password, role } = requestData;
 
-    // Validate input data
     if (!username || !password || !role) {
       return new Response(
         JSON.stringify({ message: "Missing required fields" }),
@@ -28,7 +26,6 @@ export async function POST(request) {
       );
     }
 
-    // Find the appropriate user model based on role
     const UserModel = role === "admin" ? AdminsModel : UsersModel;
 
     const user =
@@ -36,8 +33,8 @@ export async function POST(request) {
         ? await UserModel.findOne({ username })
         : await UserModel.findOne({ "userRegistration.username": username });
 
-    // If user is not found
     if (!user) {
+      console.log(UserModel);
       return new Response(JSON.stringify({ message: "User not found" }), {
         headers: { "Content-Type": "application/json" },
         status: 404,
