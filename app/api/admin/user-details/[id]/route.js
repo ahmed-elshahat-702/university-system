@@ -33,7 +33,6 @@ export async function GET(request, context) {
       status: 200,
     });
   } catch (error) {
-    console.error("Error fetching user details by ID:", error);
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       headers: {
         "Content-Type": "application/json",

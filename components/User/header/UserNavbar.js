@@ -26,7 +26,6 @@ const UserNavbar = ({
       const response = await axios.get(`/api/user/${id}`);
       setUserData(response.data);
     } catch (error) {
-      console.error("Error fetching user details:", error);
       Swal.fire(
         "Error",
         "Failed to fetch user details. Please try again later.",

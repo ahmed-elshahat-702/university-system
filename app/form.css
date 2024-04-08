@@ -1,13 +1,13 @@
 .inputForm {
-    @apply h-[50px] flex items-center transition-[0.2s] duration-[ease-in-out] pl-2.5 rounded-[10px] border-[1.5px] border-solid border-[#ecedec] focus-within:border-[1.5px] focus-within:border-solid focus-within:border-[#2d79f3];
+    @apply h-[50px] flex items-center transition-[0.2s] duration-[ease-in-out] pl-2.5 rounded-[10px] border-[1.5px] border-solid focus-within:border-[1.5px] focus-within:border-solid;
 }
 
 .input {
-    @apply w-[85%] h-full ml-2.5  border-[none];
+    @apply w-[85%] h-full mx-2.5  border-[none];
 }
 
 .role {
-  @apply w-[90%] h-full ml-2.5 rounded-[10px] border-none outline-none;
+  @apply w-[100%] mr-2 h-full ml-2.5 rounded-[10px] border-none outline-none;
 }
 
 .input:focus {

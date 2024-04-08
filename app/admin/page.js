@@ -36,7 +36,6 @@ const page = () => {
       setUsers(response.data);
       setFilteredUsers(response.data);
     } catch (error) {
-      console.error("Error fetching users:", error);
       await Swal.fire({
         icon: "error",
         title: "Error",
@@ -103,7 +102,6 @@ const page = () => {
                   });
                 })
                 .catch((error) => {
-                  console.error("Error adding user:", error);
                   Swal.fire({
                     icon: "error",
                     title: "Error",

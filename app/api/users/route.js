@@ -3,7 +3,7 @@ import UsersModel from "@/app/api/models/Users";
 
 mongoose.connect(process.env.MONGODB_URI);
 
-export async function GET(request) {
+export async function GET() {
   try {
     const users = await UsersModel.find({});
 

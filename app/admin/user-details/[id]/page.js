@@ -28,9 +28,12 @@ const Page = ({ params }) => {
       setUserData(response.data ?? {});
       setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching user details:", error);
+      Swal.fire(
+        "Error",
+        "Failed to fetch user details. Please try again later.",
+        "error"
+      );
       setIsLoading(false);
-      // Handle error fetching data
     }
   };
 
@@ -102,16 +105,13 @@ const Page = ({ params }) => {
         timer: 1500,
       });
 
-      // Clear editableField after saving
       setEditableField(null);
     } catch (error) {
-      // Show error message
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong! Please try again.",
       });
-      console.error("Error updating user details:", error);
     }
   };
 
