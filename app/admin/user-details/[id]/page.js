@@ -35,7 +35,19 @@ const Page = ({ params }) => {
   };
 
   useEffect(() => {
-    fetchData();
+    const adminData = sessionStorage.getItem("AdminData");
+    if (!adminData) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please login first",
+        text: "You need to login to access the admin page",
+        willClose: () => {
+          router.push("/");
+        },
+      });
+    } else {
+      fetchData();
+    }
   }, []);
 
   useEffect(() => {

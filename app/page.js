@@ -35,8 +35,10 @@ const LoginPage = () => {
 
       if (data.message === "Login successful") {
         const { user } = data;
-        const storageKey = role === "admin" ? "adminData" : "userData";
+
+        const storageKey = role === "admin" ? "AdminData" : "UserData";
         sessionStorage.setItem(storageKey, JSON.stringify({ username, role }));
+
         router.push(role === "admin" ? "/admin" : `/user/${user._id}`);
         setRole("user");
         Swal.fire({

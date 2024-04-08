@@ -17,7 +17,7 @@ const AdminNavbar = ({ toggleSidebar }) => {
       confirmButtonText: "Yes, logout",
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userData");
+        sessionStorage.removeItem("AdminData");
         router.push("/");
       }
     });

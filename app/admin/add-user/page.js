@@ -13,17 +13,20 @@ const Page = () => {
   const [userDataForm, setUserDataForm] = useState(initialUserData);
 
   useEffect(() => {
-    const adminData = sessionStorage.getItem("adminData");
+    const adminData = sessionStorage.getItem("AdminData");
     if (!adminData) {
       Swal.fire({
         icon: "warning",
         title: "Please login first",
         text: "You need to login to access the admin page",
-      }).then(() => {
-        router.push("/");
+        willClose: () => {
+          router.push("/");
+        },
       });
+    } else {
+      getUsers();
     }
-  }, [router]);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

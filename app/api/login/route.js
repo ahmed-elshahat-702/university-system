@@ -41,7 +41,6 @@ export async function POST(request) {
       });
     }
 
-    // Validate password
     const isValidPassword =
       role === "user"
         ? password === user.userRegistration.password

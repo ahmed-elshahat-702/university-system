@@ -7,8 +7,13 @@ import ChangePasswordModal from "./ChangePasswordModal";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-const UserNavbar = ({ id, toggleSidebar }) => {
-  const [loading, setLoading] = useState(true);
+const UserNavbar = ({
+  id,
+  toggleSidebar,
+  loading,
+  cancleLoading,
+  setLoading,
+}) => {
   const [userData, setUserData] = useState({});
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -28,13 +33,13 @@ const UserNavbar = ({ id, toggleSidebar }) => {
         "error"
       );
     } finally {
-      setLoading(false);
+      cancleLoading;
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, [id]);
+    loading ? setLoading : fetchData();
+  }, [loading]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -93,7 +98,7 @@ const UserNavbar = ({ id, toggleSidebar }) => {
       confirmButtonText: "Yes, logout",
     }).then((result) => {
       if (result.isConfirmed) {
-        sessionStorage.removeItem("userData");
+        sessionStorage.removeItem("UserData");
         router.push("/");
       }
     });

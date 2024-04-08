@@ -17,6 +17,7 @@ import {
   ExamsTable,
 } from "@/components/User/main";
 import LoadingButton from "@/components/LoadingButton";
+import { useRouter } from "next/navigation";
 
 const UserDetailsPage = ({ params }) => {
   const { id } = params;
@@ -25,9 +26,23 @@ const UserDetailsPage = ({ params }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePage, setActivePage] = useState("student-data");
 
+  const router = useRouter();
+
   useEffect(() => {
-    fetchData();
-  }, [id]);
+    const userData = sessionStorage.getItem("UserData");
+    if (!userData) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please login first",
+        text: "You need to login to see your data",
+        willClose: () => {
+          router.push("/");
+        },
+      });
+    } else {
+      fetchData();
+    }
+  }, []);
 
   const fetchData = async () => {
     setLoading(true);
@@ -103,6 +118,9 @@ const UserDetailsPage = ({ params }) => {
           toggleSidebar={() =>
             setSidebarOpen((prevSidebarOpen) => !prevSidebarOpen)
           }
+          loading={loading}
+          cancleLoading={() => setLoading(false)}
+          setLoading={() => setLoading(true)}
         />
         <UserSideNav
           loading={loading}

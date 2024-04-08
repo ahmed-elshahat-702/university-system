@@ -17,6 +17,7 @@ import {
 } from "@/components/Admin";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,8 @@ const page = () => {
   const [, setDeletedUser] = useState(null);
   const [activePage, setActivePage] = useState("students");
   const [collapsed, setCollapsed] = useState(false);
+
+  const router = useRouter();
 
   const getUsers = async () => {
     try {
@@ -45,7 +48,19 @@ const page = () => {
   };
 
   useEffect(() => {
-    getUsers();
+    const adminData = sessionStorage.getItem("AdminData");
+    if (!adminData) {
+      Swal.fire({
+        icon: "warning",
+        title: "Please login first",
+        text: "You need to login to access the admin page",
+        willClose: () => {
+          router.push("/");
+        },
+      });
+    } else {
+      getUsers();
+    }
   }, []);
 
   const deleteUser = async (id) => {
