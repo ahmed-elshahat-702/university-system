@@ -18,7 +18,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page h-screen overflow-hidden">
+    <div className="login-page h-full overflow-hidden">
       <div className="header absolute top-4 right-6">
         <ThemeSwither />
       </div>

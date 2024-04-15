@@ -83,9 +83,9 @@ const UserSideNav = ({
         </button>
         {sideNavLinks.map((link) => (
           <button
-            className={`w-full flex items-center ${
+            className={`w-full flex items-center py-2 px-4 mb-2 rounded-md
               collapsed ? "md:justify-center" : ""
-            } py-2 px-4 mb-2 rounded-md ${
+            } ${
               activePage === link.id
                 ? " bg-dark-blue text-lighter"
                 : " hover:bg-light-blue"
@@ -108,7 +108,11 @@ const UserSideNav = ({
                   className={`h-5 w-5 ${collapsed ? "" : "mr-2"}}
                     ${activeIcon === link.icon ? "text-lighter" : ""}`}
                 />
-                <span className={`ml-2 ${collapsed ? "md:hidden" : ""}`}>
+                <span
+                  className={`ml-2 whitespace-nowrap ${
+                    collapsed ? "md:hidden" : ""
+                  }`}
+                >
                   {link.name}
                 </span>
               </>

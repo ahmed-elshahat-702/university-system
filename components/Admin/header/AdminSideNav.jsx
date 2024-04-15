@@ -108,7 +108,11 @@ const AdminSideNav = ({
                   className={`h-5 w-5 ${collapsed ? "" : "mr-2"}}
                     ${activeIcon === link.icon ? "text-lighter" : ""}`}
                 />
-                <span className={`ml-2 ${collapsed ? "md:hidden" : ""}`}>
+                <span
+                  className={`ml-2 whitespace-nowrap ${
+                    collapsed ? "md:hidden" : ""
+                  }`}
+                >
                   {link.name}
                 </span>
               </>
