@@ -134,9 +134,7 @@ const page = () => {
         />
       </header>
       <main
-        className={`bg-gray-100 w-full flex justify-end h-full ${
-          loading ? "p-2" : ""
-        }`}
+        className={`w-full flex justify-end h-full ${loading ? "p-2" : ""}`}
       >
         <div
           className={`w-full transition-all ease-in-out duration-300 ${

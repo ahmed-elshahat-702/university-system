@@ -8,6 +8,7 @@ import LoadingButton from "@/components/LoadingButton";
 
 import "@/styles/EditButton.css";
 import "@/styles/SaveButton.css";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Page = ({ params }) => {
   const { id } = params;
@@ -121,16 +122,19 @@ const Page = ({ params }) => {
 
   return (
     <div className="user-details-page">
-      <div className="p-6">
-        <div className="flex items-center justify-between">
-          <h1 className="mb-4 font-bold uppercase">User Details</h1>
+      <nav className="fixed top-0 w-full flex items-center justify-between py-3 px-4 bg-lighter dark:bg-darker border-b border-light dark:border-dark shadow dark:shadow-dark z-50 transition">
+        <h1 className="font-bold uppercase">User Details</h1>
+        <div className="flex items-center gap-3">
+          <ThemeSwitcher />
           <button
             onClick={handleBackToDashboard}
-            className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-red-600 border-red-600 hover:text-white bg-white hover:bg-red-700"
+            className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-light-red border-light-red hover:text-lighter hover:bg-light-red"
           >
             Back to Dashboard
           </button>
         </div>
+      </nav>
+      <div className="px-6 pt-24 pb-4">
         {isLoading ? (
           <LoadingButton />
         ) : (
@@ -147,30 +151,29 @@ const Page = ({ params }) => {
                       key={fieldName}
                       className="mb-3 w-full sm:w-1/2 md:w-1/3 pr-4 pl-4 lg:w-1/4"
                     >
-                      <label className="form-label">
-                        {fieldName
-                          .replace(/([a-z])([A-Z])/g, "$1 $2")
-                          .toLowerCase()}
-                        :
-                      </label>
+                      {fieldName === "role" ? null : (
+                        <label className="form-label">
+                          {fieldName
+                            .replace(/([a-z])([A-Z])/g, "$1 $2")
+                            .toLowerCase()}
+                          :
+                        </label>
+                      )}
+
                       <div className="flex gap-2">
-                        {fieldName === "role" ? (
-                          <span className="block appearance-none w-full py-1 px-2 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded bg-body-secondary">
-                            {fieldValue}
-                          </span>
-                        ) : editableField &&
+                        {fieldName === "role" ? null : editableField &&
                           editableField.section === section &&
                           editableField.fieldName === fieldName ? (
                           <input
                             type="text"
-                            className="block appearance-none w-full py-1 px-2 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded focus:outline-none focus:border-blue-600"
+                            className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal border border-gray rounded"
                             name={fieldName}
                             value={fieldValue}
                             onChange={handleInputChange}
                             ref={inputRef}
                           />
                         ) : (
-                          <span className="block appearance-none w-full py-1 px-2 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded">
+                          <span className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal border dark:bg-dark border-gray rounded">
                             {fieldValue}
                           </span>
                         )}
@@ -180,7 +183,7 @@ const Page = ({ params }) => {
                           editableField.fieldName !== fieldName) ? (
                           <button
                             onClick={() => handleEdit(section, fieldName)}
-                            className="edit-button inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-blue-600 border-blue-600 hover:text-white bg-white hover:bg-blue-600 edit-button"
+                            className="edit-button inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-dark-blue border-dark-blue hover:text-lighter  hover:bg-dark-blue edit-button"
                           >
                             Edit
                           </button>
@@ -190,7 +193,7 @@ const Page = ({ params }) => {
                         editableField.fieldName === fieldName ? (
                           <button
                             onClick={() => handleSave(section, fieldName)}
-                            className="save-button inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white bg-white save-button"
+                            className="save-button inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-dark-blue border-dark-blue hover:bg-dark-blue hover:text-lighter bg-lighter save-button"
                           >
                             Save
                           </button>

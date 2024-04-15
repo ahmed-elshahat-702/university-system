@@ -66,7 +66,7 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
         className="absolute inset-0 bg-black opacity-25 cursor-pointer"
         onClick={handleCloseModal}
       ></div>
-      <div className="bg-white rounded-lg p-6 z-50">
+      <div className="bg-light dark:bg-dark border border-dark dark:border-light rounded-lg p-6 z-50 transition-all">
         {loading && <LoadingSpinner />}
         <div className="mb-4">
           <h2 className="text-xl font-bold mb-2">Change Password</h2>
@@ -91,17 +91,17 @@ const ChangePasswordModal = ({ id, showModal, setShowModal }) => {
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-center gap-3">
               <button
                 type="button"
-                className="p-2 mr-2 bg-red-600 rounded text-white hover:bg-red-700"
+                className="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline text-light-red border-light-red hover:bg-light-red hover:text-lighter mb-4 ml-2"
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
               <button
                 type="button"
-                className="p-2 bg-blue-600 rounded text-white hover:bg-blue-700"
+                className="inline-block align-middle text-center select-none font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline bg-dark-blue text-lighter hover:bg-light-blue mb-4"
                 onClick={handleChangePassword}
                 disabled={submitDisabled}
               >

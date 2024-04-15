@@ -25,10 +25,10 @@ const Search = ({ users = [], setFilteredUsers }) => {
         id="search-input"
         placeholder="Search users..."
         onChange={handleSearch}
-        className="w-full  borderborder-gray-300 rounded-md px-3 py-1 pl-8 outline-none focus:border-2 focus:border-blue-500"
+        className="w-full border border-dark rounded-md px-3 py-1 pl-8 outline-none focus:border-dark-blue"
       />
       <span className="absolute inset-y-0 left-0 pl-2 flex items-center">
-        <FontAwesomeIcon icon={faSearch} className="text-gray-500" />
+        <FontAwesomeIcon icon={faSearch}/>
       </span>
       <button
         type="button"
@@ -36,7 +36,7 @@ const Search = ({ users = [], setFilteredUsers }) => {
         onClick={clearSearch}
         title="Clear search"
       >
-        <FontAwesomeIcon icon={faTimes} className="text-gray-500" />
+        <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
   );

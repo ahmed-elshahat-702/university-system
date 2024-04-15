@@ -70,6 +70,13 @@ const LoginForm = ({
     return username.match(usernameRegex) && password.match(passwordRegex);
   };
 
+  // submit on inter
+  (event) => {
+    if (event.key === "Enter") {
+      handleSubmitForm(event);
+    }
+  };
+
   const handleSubmitForm = (event) => {
     event.preventDefault();
     if (validateForm()) {
@@ -125,24 +132,28 @@ const LoginForm = ({
 
   return (
     <>
-      {loading && <LoadingSpinner />}
       <form
         onSubmit={handleSubmitForm}
-        className="flex flex-col gap-2.5 bg-white h-full w-full py-5 px-4 sm:p-[30px] rounded-md sm:shadow-md"
+        className="flex flex-col gap-2.5 bg-lighter dark:bg-darker h-full w-full py-5 px-4 sm:p-[30px] rounded-md sm:shadow-md transition-all"
       >
-        <label htmlFor="username" className="text-gray-950 w-fit">
+        <label
+          htmlFor="username"
+          className={`w-fit  ${usernameError ? "text-light-red" : ""}`}
+        >
           Username
         </label>
         <div
           className={`inputForm shadow  ${
             usernameError
-              ? "border-red-600 focus-within:border-red-600"
-              : "border-gray-300 focus-within:border-blue-600"
+              ? "border-light-red focus-within:border-light-red"
+              : "border-dark focus-within:border-dark-blue"
           }`}
         >
           <GoMention
             className={`text-3xl pr-2 border-r ${
-              usernameError ? "border-red-600" : "border-gray-300"
+              usernameError
+                ? "text-light-red border-light-red"
+                : "text-dark border-dark"
             }`}
           />
           <input
@@ -154,26 +165,33 @@ const LoginForm = ({
             onChange={handleUsernameChange}
           />
         </div>
-        {usernameError && <p className="text-red-500">{usernameError}</p>}
-        <label htmlFor="password" className="text-gray-950 w-fit">
+        {usernameError && <p className="text-light-red">{usernameError}</p>}
+        <label
+          htmlFor="password"
+          className={`w-fit  ${passwordError ? "text-light-red" : ""}`}
+        >
           Password
         </label>
         <div
           className={`inputForm shadow ${
             passwordError
-              ? "border-red-600 focus-within:border-red-600"
-              : "border-gray-300 focus-within:border-blue-600"
+              ? "border-light-red focus-within:border-light-red"
+              : "text-dark border-dark focus-within:border-dark-blue"
           }`}
         >
           <IoLockClosedOutline
             className={`text-3xl pr-2 border-r  ${
-              passwordError ? "border-red-600" : "border-gray-300"
+              passwordError
+                ? "text-light-red border-light-red"
+                : "text-dark border-dark"
             }`}
           />
           <input
             type={showPassword ? "text" : "password"}
             id="password"
-            className={`input ${passwordError && "border-red-600"}`}
+            className={`input ${
+              passwordError && "text-light-red border-light-red"
+            }`}
             placeholder="Enter your Password"
             value={password}
             onChange={handlePasswordChange}
@@ -182,24 +200,28 @@ const LoginForm = ({
             {showPassword ? (
               <FaRegEyeSlash
                 className={`text-4xl px-2 border-l ${
-                  passwordError ? "border-red-600" : "border-gray-300"
+                  passwordError
+                    ? "text-light-red border-light-red"
+                    : "text-dark border-dark"
                 }`}
               />
             ) : (
               <FaRegEye
                 className={`text-4xl px-2 border-l ${
-                  passwordError ? "border-red-600" : "border-gray-300"
+                  passwordError
+                    ? "text-light-red border-light-red"
+                    : "text-dark border-dark"
                 }`}
               />
             )}
           </button>
         </div>
-        {passwordError && <p className="text-red-500">{passwordError}</p>}
-        <label htmlFor="role" className="text-gray-950 w-fit">
+        {passwordError && <p className="text-light-red">{passwordError}</p>}
+        <label htmlFor="role" className="w-fit">
           Role
         </label>
         <div className="inputForm shadow">
-          <MdOutlineAdminPanelSettings className="text-3xl pr-2 border-r border-gray-300" />
+          <MdOutlineAdminPanelSettings className="text-3xl pr-2 border-r text-dark border-dark" />
           <select
             className="role"
             id="role"
@@ -210,7 +232,10 @@ const LoginForm = ({
             <option value="admin">Admin</option>
           </select>
         </div>
-        <button className="button-submit">Sign In</button>
+        <button className="button-submit relative uppercase">
+          Sign In
+          {loading && <LoadingSpinner />}
+        </button>
       </form>
     </>
   );

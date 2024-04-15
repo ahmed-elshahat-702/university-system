@@ -1,13 +1,13 @@
 .inputForm {
-    @apply h-[50px] flex items-center transition-[0.2s] duration-[ease-in-out] pl-2.5 rounded-[10px] border-[1.5px] border-solid focus-within:border-[1.5px] focus-within:border-solid;
+    @apply h-[50px] flex items-center bg-lighter transition-[0.2s] duration-[ease-in-out] pl-2.5 rounded-[10px] border-[1.5px] border-solid focus-within:border-[1.5px] focus-within:border-solid;
 }
 
 .input {
-    @apply w-[85%] h-full mx-2.5  border-[none];
+    @apply w-[85%] h-full mx-2.5 bg-lighter text-darker border-[none];
 }
 
 .role {
-  @apply w-[100%] mr-2 h-full ml-2.5 rounded-[10px] border-none outline-none;
+  @apply w-[100%] mr-2 h-full ml-2.5 bg-lighter text-darker border-none outline-none;
 }
 
 .input:focus {
@@ -15,5 +15,5 @@
 }
 
 .button-submit {
-    @apply bg-[#151717] text-[white] text-[15px] font-medium h-[50px] w-full cursor-pointer mt-5 mb-2.5 mx-0 rounded-[10px] border-[none] hover:bg-[#252727];
+    @apply bg-darker dark:bg-dark text-lighter text-[15px] font-medium h-[50px] w-full cursor-pointer mt-5 mb-2.5 mx-0 rounded-[10px] border-[none] hover:bg-dark dark:hover:bg-light dark:hover:text-darker transition;
 }
