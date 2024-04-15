@@ -20,8 +20,9 @@ const ThemeSwitcher = () => {
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       {theme === "light" ? (
-        <CiDark className="text-3xl" />
+        "dark"
       ) : (
+        // <CiDark className="text-3xl" />
         <CiLight className="text-3xl" />
       )}
     </button>
