@@ -22,9 +22,9 @@ const LoginPage = () => {
       <div className="header absolute top-4 right-6">
         <ThemeSwither />
       </div>
-      <div className="main  md:flex p-2 sm:p-3 gap-3">
+      <div className="main h-full md:flex p-2 sm:p-3 gap-3">
         <div
-          className="left h-full w-full md:w-1/2 rounded-md bg-light dark:bg-dark space-y-6 p-2
+          className="left h-full w-full lg:w-1/2 rounded-md bg-light dark:bg-dark space-y-6 p-2
       sm:p-4 shadow-xl transition-all"
         >
           <div className="header p-2 sm:p-0 space-y-2 transition-all">
@@ -50,7 +50,7 @@ const LoginPage = () => {
           </div>
         </div>
         <div
-          className="right h-screen w-full md:w-1/2 rounded-md hidden md:flex  flex-col justify-center 
+          className="right w-full md:w-1/2 rounded-md hidden lg:flex  flex-col justify-center 
       p-4"
         >
           <div className="w-full">
