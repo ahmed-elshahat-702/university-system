@@ -126,8 +126,7 @@ const Page = () => {
                       />
                     )}
                     {fieldName === "role" && ""}
-                    {/* Regular input fields */}
-                    {fieldName !== "birthdate" && fieldName !== "role" && (
+                    {fieldName === "username" && (
                       <input
                         type="text"
                         name={fieldName}
@@ -139,7 +138,7 @@ const Page = () => {
                             ...prevData,
                             [section]: {
                               ...prevData[section],
-                              [fieldName]: e.target.value,
+                              [fieldName]: e.target.value.toLowerCase(), // Convert input to lowercase
                             },
                           }))
                         }
@@ -147,6 +146,29 @@ const Page = () => {
                         className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal border border-gray rounded"
                       />
                     )}
+                    {/* Regular input fields */}
+                    {fieldName !== "birthdate" &&
+                      fieldName !== "role" &&
+                      fieldName !== "username" && (
+                        <input
+                          type="text"
+                          name={fieldName}
+                          placeholder={fieldName}
+                          id={`${section}.${fieldName}`}
+                          value={fieldValue}
+                          onChange={(e) =>
+                            setUserDataForm((prevData) => ({
+                              ...prevData,
+                              [section]: {
+                                ...prevData[section],
+                                [fieldName]: e.target.value,
+                              },
+                            }))
+                          }
+                          required={isRequired(section, fieldName)}
+                          className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal border border-gray rounded"
+                        />
+                      )}
                   </div>
                 ))}
               </fieldset>

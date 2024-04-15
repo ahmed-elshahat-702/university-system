@@ -33,8 +33,9 @@ const LoginForm = ({
   };
 
   const handleUsernameChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.toLowerCase();
     setUsername(value);
+    console.log(username);
     setUsernameError(
       value.match(usernameRegex)
         ? ""

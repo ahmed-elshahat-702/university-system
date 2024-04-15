@@ -161,7 +161,26 @@ const Page = ({ params }) => {
                       )}
 
                       <div className="flex gap-2">
-                        {fieldName === "role" ? null : editableField &&
+                        {fieldName === "role" ? null : fieldName ===
+                          "username" ? (
+                          <input
+                            type="text"
+                            className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal border border-gray rounded"
+                            name={fieldName}
+                            value={fieldValue}
+                            onChange={(e) =>
+                              setUserData((prevUserData) => ({
+                                ...prevUserData,
+                                [editableField.section]: {
+                                  ...prevUserData[editableField.section],
+                                  [editableField.fieldName]:
+                                    e.target.value.toLowerCase(),
+                                },
+                              }))
+                            }
+                            ref={inputRef}
+                          />
+                        ) : editableField &&
                           editableField.section === section &&
                           editableField.fieldName === fieldName ? (
                           <input

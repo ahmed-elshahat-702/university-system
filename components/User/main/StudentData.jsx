@@ -22,7 +22,9 @@ const StudentData = ({ loading, userData }) => {
                     key={key}
                     className="list-group-item bg-gray dark:bg-darker p-2 mb-2 last:mb-0 rounded transition-all"
                   >
-                    <span className="me-2 font-semibold">{key}:</span>
+                    <span className="me-2 font-semibold">
+                      {key.replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase()}:
+                    </span>
                     <span>{value}</span>
                   </li>
                 ))}
